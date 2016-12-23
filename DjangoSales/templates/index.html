@@ -1,0 +1,59 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="{% static "img/apple-icon.png"" %}>
+  <link rel="icon" type="image/png" sizes="96x96" href="{% static "img/favicon.png"" %}>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title>Bienvenido|DjangoSales</title>
+
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <!-- Bootstrap core CSS     -->
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet" />
+    <!-- Animation library for notifications   -->
+    <link href="{% static "css/animate.min.css" %}" rel="stylesheet"/>
+    <!--  Paper Dashboard core CSS    -->
+    <link href="{% static "css/paper-dashboard.css" %}" rel="stylesheet"/>
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="{% static "css/demo.css" %}" rel="stylesheet" />
+    <!--  Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href="{% static "css/themify-icons.css" %}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js"></script>
+    <script src="{% static "js/angular-ui.js" %}"></script>
+    <script src="{% static "js/dirPagination.js" %}"></script>
+</head>
+<body ng-controller="mainController as $ctrl">
+	<ui-view></ui-view>
+</body>
+<script src="{% static "js/app/app.js" %}"></script>
+<script src="{% static "js/app/module.js" %}"></script>
+<script src="{% static "js/app/factories/sessionFactory.js" %}"></script>
+<script src="{% static "js/app/factories/authFactory.js" %}"></script>
+<script src="{% static "js/app/modules/login/controllers/loginCtrl.js" %}"></script>
+
+<script src="{% static "js/jquery-1.10.2.js" %}" type="text/javascript"></script>
+<script src="{% static "js/bootstrap.min.js" %}" type="text/javascript"></script>
+
+<!--  Checkbox, Radio & Switch Plugins -->
+<script src="{% static "js/bootstrap-checkbox-radio.js" %}"></script>
+
+<!--  Charts Plugin -->
+<script src="{% static "js/chartist.min.js" %}"></script>
+
+<!--  Notifications Plugin    -->
+<script src="{% static "js/bootstrap-notify.js" %}"></script>
+
+<!-- Paper Dashboard Core javascript and methods for Demo purpose -->
+<script src="{% static "js/paper-dashboard.js" %}"></script>
+
+<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+<script src="{% static "js/demo.js" %}"></script>
+
+</html>

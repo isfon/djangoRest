@@ -9,6 +9,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
+djangoRest/db.sqlite3
 build/
 develop-eggs/
 dist/
