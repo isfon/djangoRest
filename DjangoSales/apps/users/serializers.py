@@ -10,21 +10,14 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class TokenSerializer(serializers.HyperlinkedModelSerializer):
-    #serializers.PrimaryKeyRelatedField(source='proveedor.nombre', queryset=Proveedor.objects.all())
+
     user = UserSerializer()
 
     class Meta:
         model = Token
-        fields = ('id', 'key', 'user')
+        fields = ('key', 'user')
 
 class TokenViewSet(viewsets.ModelViewSet):
-	def get_object(self, token):
-		try:
-			return Token.objects.get(key=token)
-		except Token.DoesNotExist:
-			raise Http404
 
-	def get(self, request, token, format=None):
-		snippet = self.get_object(token)
-		serializer = TokenSerializer(snippet)
-		return Response(serializer.data)
+    queryset = Token.objects.all()
+    serializer_class = TokenSerializer
