@@ -5,10 +5,10 @@ from rest_framework.response import Response
 from rest_framework import serializers, viewsets, generics, filters
 from rest_framework import authentication, permissions
 from apps.users.models import User
-from .serializers import (ProductoSerializer, UnidadSerializer, CategoriaSerializer,
+from .serializers import (ProductoSerializer, UnidadSerializer,
                           EntradasSerializer, ProveedorSerializer, InventarioSerializer)
-from .models import (CatalogoCategoria, Proveedor, Producto,
-                     CatalogoUnidades, Inventario, Entradas)
+from .models import (Proveedor, Producto,
+                     Unidad, Inventario, Entradas)
 import json
 
 
@@ -26,37 +26,10 @@ class ProductoViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         proveedor = Proveedor.objects.get(id=request.data['proveedor'])
-        categoria = CatalogoCategoria.objects.get(id=request.data['categoria'])
-        unidad = CatalogoUnidades.objects.get(id=request.data['unidad'])
+        unidad = Unidad.objects.get(id=request.data['unidad'])
         entrada = Producto.objects.create(nombre=request.data['nombre'],
                                           upc=request.data['upc'],
                                           unidad=unidad,
-                                          categoria=categoria,
-                                          proveedor=proveedor,
-                                          precio_entrada=request.data[
-                                              'precio_entrada'],
-                                          precio_salida=request.data['precio_salida'])
-        inv = Inventario()
-        inv.producto = entrada
-        inv.cantidad = 0
-        inv.save()
-        return Response({'producto': entrada.nombre})
-
-
-class ProductoViewSet(viewsets.ModelViewSet):
-    queryset = Producto.objects.all()
-    serializer_class = ProductoSerializer
-    filter_backends = (filters.DjangoFilterBackend,)
-    filter_fields = ('upc', 'is_active')
-
-    def create(self, request, *args, **kwargs):
-        proveedor = Proveedor.objects.get(id=request.data['proveedor'])
-        categoria = CatalogoCategoria.objects.get(id=request.data['categoria'])
-        unidad = CatalogoUnidades.objects.get(id=request.data['unidad'])
-        entrada = Producto.objects.create(nombre=request.data['nombre'],
-                                          upc=request.data['upc'],
-                                          unidad=unidad,
-                                          categoria=categoria,
                                           proveedor=proveedor,
                                           precio_entrada=request.data[
                                               'precio_entrada'],
@@ -70,8 +43,7 @@ class ProductoViewSet(viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         updated_instance = Producto.objects.get(pk=request.data["id"])
         proveedor = Proveedor.objects.get(id=request.data["proveedor"])
-        unidad = CatalogoUnidades.objects.get(id=request.data["unidad"])
-        categoria = CatalogoCategoria.objects.get(id=request.data["categoria"])
+        unidad = Unidad.objects.get(id=request.data["unidad"])
         updated_instance.upc = request.data['upc']
         updated_instance.nombre = request.data['nombre']
         updated_instance.unidad = unidad
@@ -91,8 +63,7 @@ class EntradasViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         proveedor = Proveedor.objects.get(id=request.data['proveedor'])
-        categoria = CatalogoCategoria.objects.get(id=request.data['categoria'])
-        unidad = CatalogoUnidades.objects.get(id=request.data['unidad'])
+        unidad = Unidad.objects.get(id=request.data['unidad'])
         entrada = Entradas.objects.create(nombre=request.data['nombre'],
                                           upc=request.data['upc'],
                                           unidad=unidad,
@@ -108,8 +79,7 @@ class EntradasViewSet(viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         updated_instance = Entradas.objects.get(pk=request.data["id"])
         proveedor = Proveedor.objects.get(id=request.data["proveedor"])
-        unidad = CatalogoUnidades.objects.get(id=request.data["unidad"])
-        categoria = CatalogoCategoria.objects.get(id=request.data["categoria"])
+        unidad = Unidad.objects.get(id=request.data["unidad"])
         updated_instance.upc = request.data['upc']
         updated_instance.nombre = request.data['nombre']
         updated_instance.unidad = unidad
@@ -144,9 +114,7 @@ class InventarioViewSet(viewsets.ModelViewSet):
             entry.nombre = updated_instance.producto.nombre
             entry.proveedor = Proveedor.objects.get(
                 pk=updated_instance.producto.proveedor.id)
-            entry.categoria = CatalogoCategoria.objects.get(
-                pk=updated_instance.producto.categoria.id)
-            entry.unidad = CatalogoUnidades.objects.get(
+            entry.unidad = Unidad.objects.get(
                 pk=updated_instance.producto.unidad.id)
             entry.precio_entrada = updated_instance.producto.precio_entrada
             entry.precio_salida = updated_instance.producto.precio_salida
@@ -159,11 +127,6 @@ class InventarioViewSet(viewsets.ModelViewSet):
         return Response({'producto': updated_instance.producto.nombre})
 
 
-class CategoriarViewSet(viewsets.ModelViewSet):
-    queryset = CatalogoCategoria.objects.all()
-    serializer_class = CategoriaSerializer
-
-
 class UnidadViewSet(viewsets.ModelViewSet):
-    queryset = CatalogoUnidades.objects.all()
+    queryset = Unidad.objects.all()
     serializer_class = UnidadSerializer

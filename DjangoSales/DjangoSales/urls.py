@@ -5,13 +5,12 @@ from rest_framework import routers
 from apps.main import urls as main_urls
 from apps.users.serializers import TokenViewSet
 from apps.main.views import (ProveedorViewSet, ProductoViewSet,
-                             CategoriarViewSet, InventarioViewSet, UnidadViewSet, EntradasViewSet)
+                             InventarioViewSet, UnidadViewSet, EntradasViewSet)
 
 router = routers.DefaultRouter()
 router.register(r'profile', TokenViewSet)
 router.register(r'productos', ProductoViewSet)
 router.register(r'proveedores', ProveedorViewSet)
-router.register(r'categorias', CategoriarViewSet)
 router.register(r'inventario', InventarioViewSet)
 router.register(r'unidades', UnidadViewSet)
 router.register(r'entradas', EntradasViewSet)
