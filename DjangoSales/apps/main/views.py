@@ -47,7 +47,6 @@ class ProductoViewSet(viewsets.ModelViewSet):
         updated_instance.upc = request.data['upc']
         updated_instance.nombre = request.data['nombre']
         updated_instance.unidad = unidad
-        updated_instance.categoria = categoria
         updated_instance.proveedor = proveedor
         updated_instance.precio_entrada = request.data['precio_entrada']
         updated_instance.precio_salida = request.data['precio_salida']
