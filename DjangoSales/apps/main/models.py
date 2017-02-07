@@ -54,7 +54,7 @@ class Inventario(models.Model):
 
     producto = models.ForeignKey(Producto)
     cantidad = models.FloatField(default=0)
-    fecha = models.DateField(default=date.today, null=True)
+    fecha = models.DateTimeField(default=date.today, null=True)
 
     def __str__(self):
         return '%s' % self.producto
