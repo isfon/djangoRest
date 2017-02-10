@@ -104,26 +104,29 @@ class InventarioViewSet(viewsets.ModelViewSet):
     filter_fields = ('producto__upc',)
 
     def update(self, request, *args, **kwargs):
-        updated_instance = Inventario.objects.get(pk=request.data['id'])
-        if(request.data['update'] == True):
-            updated_instance.cantidad = float(
-                updated_instance.cantidad) + float(request.data['cantidad'])
-            entry = Entradas()
-            entry.upc = updated_instance.producto.upc
-            entry.nombre = updated_instance.producto.nombre
-            entry.proveedor = Proveedor.objects.get(
-                pk=updated_instance.producto.proveedor.id)
-            entry.unidad = Unidad.objects.get(
-                pk=updated_instance.producto.unidad.id)
-            entry.precio_entrada = updated_instance.producto.precio_entrada
-            entry.precio_salida = updated_instance.producto.precio_salida
-            entry.cantidad = updated_instance.cantidad
-            entry.save()
+        if request.data['update'] == True:
+            productos = request.data['productos']
+            for x in productos:
+                updated_instance = Inventario.objects.get(pk=x['id'])
+                updated_instance.cantidad = float(
+                    updated_instance.cantidad) + float(x['cantidad'])
+                updated_instance.save()
+                entry = Entradas()
+                entry.upc = updated_instance.producto.upc
+                entry.nombre = updated_instance.producto.nombre
+                entry.proveedor = Proveedor.objects.get(
+                    pk=updated_instance.producto.proveedor.id)
+                entry.unidad = Unidad.objects.get(
+                    pk=updated_instance.producto.unidad.id)
+                entry.precio_entrada = updated_instance.producto.precio_entrada
+                entry.precio_salida = updated_instance.producto.precio_salida
+                entry.cantidad = updated_instance.cantidad
+                entry.save()
         else:
+            updated_instance = Inventario.objects.get(pk=request.data['id'])
             updated_instance.cantidad = request.data['cantidad']
-            print(request.data['cantidad'])
-        updated_instance.save()
-        return Response({'producto': updated_instance.producto.nombre})
+            updated_instance.save()
+        return Response({'Message': 'Productos agregados exitosamente'})
 
 
 class UnidadViewSet(viewsets.ModelViewSet):

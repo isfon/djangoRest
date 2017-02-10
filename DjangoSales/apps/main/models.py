@@ -62,7 +62,7 @@ class Inventario(models.Model):
 
 class Entradas(models.Model):
 
-    upc = models.BigIntegerField(null=True, blank=True, unique=True)
+    upc = models.BigIntegerField(null=True, blank=True)
     nombre = models.CharField(max_length=50, null=True, blank=True)
     proveedor = models.ForeignKey(Proveedor, null=True, blank=True)
     unidad = models.ForeignKey(Unidad, null=True, blank=True)
