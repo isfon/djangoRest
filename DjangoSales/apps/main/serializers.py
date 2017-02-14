@@ -5,7 +5,15 @@ from rest_framework import routers, serializers, viewsets, generics
 from rest_framework.response import Response
 from rest_framework import filters
 from .forms import ProveedorForm
+from rest_framework.serializers import ModelSerializer
 
+
+
+class ProductCreateSerializer(ModelSerializer):
+    class Meta:
+        model = Producto
+        fields = ('upc', 'proveedor', 'nombre',
+                  'unidad', 'precio_entrada', 'precio_salida')
 
 class UnidadSerializer(serializers.HyperlinkedModelSerializer):
 
@@ -46,6 +54,12 @@ class ProveedorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Proveedor
         fields = ('id', 'nombre', 'telefono', 'correo', 'direccion')
+
+class ProveedorCreateSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Proveedor
+        fields = ('nombre', 'telefono', 'correo', 'direccion')
 
 
 class InventarioSerializer(serializers.HyperlinkedModelSerializer):

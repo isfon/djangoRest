@@ -54,7 +54,7 @@ class Inventario(models.Model):
 
     producto = models.ForeignKey(Producto)
     cantidad = models.FloatField(default=0)
-    fecha = models.DateTimeField(default=date.today, null=True)
+    fecha = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return '%s' % self.producto
@@ -69,7 +69,7 @@ class Entradas(models.Model):
     precio_entrada = models.FloatField(default=0)
     precio_salida = models.FloatField(default=0)
     cantidad = models.FloatField(default=0)
-    fecha = models.DateField(default=date.today, null=True)
+    fecha = models.DateTimeField(auto_now =True)
 
     class Meta:
         verbose_name = 'Entrada'
