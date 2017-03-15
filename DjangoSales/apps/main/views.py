@@ -21,8 +21,6 @@ class IndexView(TemplateView):
 class CreateProductView(CreateAPIView):
     queryset = Producto.objects.all()
     serializer_class = ProductCreateSerializer
-    filter_backends = (filters.DjangoFilterBackend,)
-    filter_fields = ('upc', 'is_active')
 
     def create(self, request, *args, **kwargs):
         proveedor = Proveedor.objects.get(id=request.data['proveedor'])
