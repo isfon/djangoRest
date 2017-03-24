@@ -1,6 +1,7 @@
 from django.conf.urls import url, include
 from .models import (Proveedor, Producto,
-                     Unidad, Inventario, Entradas)
+                     Unidad, Inventario, Entradas,
+                     CategoriaProducto)
 from rest_framework import routers, serializers, viewsets, generics
 from rest_framework.response import Response
 from rest_framework import filters
@@ -14,6 +15,11 @@ class ProductCreateSerializer(ModelSerializer):
         model = Producto
         fields = ('upc', 'proveedor', 'nombre',
                   'unidad', 'precio_entrada', 'precio_salida')
+
+class CategoriaProductoSerializer(ModelSerializer):
+    class Meta:
+        model = CategoriaProducto
+        fields = ('pk','nombre','is_active')
 
 class UnidadSerializer(serializers.HyperlinkedModelSerializer):
 

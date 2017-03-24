@@ -7,10 +7,12 @@ from apps.users.models import User
 from rest_framework.generics import CreateAPIView, UpdateAPIView, ListAPIView, RetrieveAPIView, DestroyAPIView
 from .serializers import (ProductoSerializer, UnidadSerializer,
                           EntradasSerializer, ProveedorSerializer, InventarioSerializer,
-                          ProductCreateSerializer,ProveedorCreateSerializer
+                          ProductCreateSerializer,ProveedorCreateSerializer,
+                          CategoriaProductoSerializer
                           )
 from .models import (Proveedor, Producto,
-                     Unidad, Inventario, Entradas)
+                     Unidad, Inventario, Entradas,
+                     CategoriaProducto)
 import json
 
 class IndexView(TemplateView):
@@ -60,6 +62,14 @@ class ProductsListView(ListAPIView):
     serializer_class = ProductoSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('upc', 'is_active')
+
+class CategoryProductsListView(ListAPIView):
+    queryset = CategoriaProducto.objects.all()
+    serializer_class = CategoriaProductoSerializer
+
+class SingleCategoryProductView(RetrieveAPIView):
+    queryset = CategoriaProducto.objects.all()
+    serializer_class = CategoriaProductoSerializer
 
 class SingleProductView(RetrieveAPIView):
     queryset = Producto.objects.all()

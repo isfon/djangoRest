@@ -16,6 +16,17 @@ class Unidad(models.Model):
     def __str__(self):
         return self.nombre
 
+class CategoriaProducto(models.Model):
+    nombre = models.CharField(max_length=50)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = "Categoria Producto"
+        verbose_name_plural = "Categoria Producto"
+
+    def __str__(self):
+        return self.nombre
+
 
 class Proveedor(models.Model):
 

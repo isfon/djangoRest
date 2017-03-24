@@ -7,7 +7,8 @@ from .views import (
     DeleteEntryView, ProveedorListView,
     SingleProveedorView, CreateProveedorView,
     DeleteProveedorView,InventarioListView,
-    SingleInventarioView, UpdateInventarioView
+    SingleInventarioView, UpdateInventarioView,
+    CategoryProductsListView, SingleCategoryProductView
     )
 
 urlpatterns = [
@@ -28,4 +29,6 @@ urlpatterns = [
     url(r'^api/inventario/$', InventarioListView.as_view(), name='inventario_list'),
     url(r'^api/inventario/(?P<pk>\d+)/$', SingleInventarioView.as_view(), name='single_inventario'),
     url(r'^api/inventario/update/$', UpdateInventarioView.as_view(), name='update_inventario'),
+    url(r'^api/categories/$', CategoryProductsListView.as_view(), name='categories_list'),
+    url(r'^api/category/(?P<pk>\d+)/$', SingleCategoryProductView.as_view(), name='single_category'),
 ]
