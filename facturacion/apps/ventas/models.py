@@ -34,6 +34,8 @@ class Proveedor(models.Model):
     telefono = models.IntegerField(null=True, blank=True)
     correo = models.EmailField(null=True, blank=True)
     direccion = models.CharField(max_length=100, null=True, blank=True)
+    rfc = models.CharField(max_length=50,null=True, blank=True)
+    nombre_contacto = models.CharField(max_length=100,null=True, blank=True)
 
     class Meta:
         verbose_name = "Proveedor"

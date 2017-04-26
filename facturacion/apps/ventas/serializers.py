@@ -58,13 +58,13 @@ class ProveedorSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Proveedor
-        fields = ('id', 'nombre', 'telefono', 'correo', 'direccion')
+        fields = ('id', 'nombre', 'telefono', 'correo', 'direccion','rfc','nombre_contacto')
 
 class ProveedorCreateSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Proveedor
-        fields = ('nombre', 'telefono', 'correo', 'direccion')
+        fields = ('nombre', 'telefono', 'correo', 'direccion','rfc','nombre_contacto')
 
 
 class InventarioSerializer(serializers.HyperlinkedModelSerializer):
